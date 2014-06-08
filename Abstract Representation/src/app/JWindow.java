@@ -17,7 +17,8 @@ import java.net.*;
 public class JWindow extends PApplet implements IncomingUDPListener{
 	
 	int port = 9090;
-	String destAddress = "localhost";
+//	String destAddress = "localhost";
+	String destAddress = "192.168.1.124";
 	
 	DatagramSocket sSocket = null;
 	//DatagramSocket rSocket = null;
@@ -31,6 +32,7 @@ public class JWindow extends PApplet implements IncomingUDPListener{
 	
 	public static void main(String[] args) {
 		PApplet.main(new String[] { "app.JWindow" });
+		System.out.println(args[0]+", "+args[1]);
 		System.out.println(java.lang.Runtime.getRuntime().maxMemory());
 	}
 	
@@ -125,7 +127,7 @@ public class JWindow extends PApplet implements IncomingUDPListener{
 	@Override
 	public void getUDPincomingByteArray(byte[] data) {
 		
-		System.out.println("**************");
+		//System.out.println("**************");
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
 		incomingVideoStream.loadPixels();
@@ -161,7 +163,7 @@ public class JWindow extends PApplet implements IncomingUDPListener{
 		}
 
 		byte[] packet = baStream.toByteArray();
-		System.out.println("Sending datagram with " + packet.length + " bytes");
+		System.out.println("[Sending] datagram with " + packet.length + " bytes to " + this.destAddress);
 		try {
 			sSocket.send(new DatagramPacket(packet, packet.length, InetAddress.getByName(destAddress), port));
 		} catch (Exception e) {

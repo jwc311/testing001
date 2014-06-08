@@ -44,7 +44,7 @@ public class UDPReceiver extends Thread{
 			}
 			byte[] data = p.getData();
 			this.UDPListener.getUDPincomingByteArray(data);
-			System.out.println("[Received] datagram with " + data.length + " bytes.");
+			//System.out.println("[Received] datagram with " + data.length + " bytes.");
 		}
 	}
 }
