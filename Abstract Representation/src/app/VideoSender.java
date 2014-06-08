@@ -4,6 +4,7 @@ import processing.core.*;
 import processing.video.*;
 
 import javax.imageio.*;
+
 import java.awt.image.*;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +15,8 @@ public class VideoSender extends PApplet {
 
 	// This is the port we are sending to
 	int clientPort = 9100;
+	String address = "localhost";
+	
 	// This is our object that sends UDP out
 	DatagramSocket ds;
 	// Capture object
@@ -38,8 +41,8 @@ public class VideoSender extends PApplet {
 		}
 		
 //		size(640, 480);
-//		size(640, 480);
-		size(800, 600);
+		size(864, 480);
+//		size(800, 600);
 		// Setting up the DatagramSocket, requires try/catch
 		try {
 			ds = new DatagramSocket();
@@ -104,7 +107,9 @@ public class VideoSender extends PApplet {
 		System.out.println("Sending datagram with " + packet.length + " bytes");
 		try {
 			ds.send(new DatagramPacket(packet, packet.length, InetAddress
-					.getByName("192.168.0.100"), clientPort));
+					.getByName(address), clientPort));
+//			ds.send(new DatagramPacket(packet, packet.length, InetAddress
+//					.getByName("localhost"), clientPort));
 //			System.out.println("data sent");
 		} catch (Exception e) {
 			e.printStackTrace();

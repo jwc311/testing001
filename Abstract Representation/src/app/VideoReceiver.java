@@ -15,13 +15,17 @@ public class VideoReceiver extends PApplet {
 
 	// Port we are receiving.
 	int port = 9100;
+	String address = "localhost";
 	DatagramSocket ds;
 	// A byte array to read into (max size of 65536, could be smaller)
 	byte[] buffer = new byte[65536];
-
 	PImage video;
 	
+//	int vWidth = 800, vHeight = 600;
+	int vWidth =864, vHeight = 480;
+	
 	private int screenWidth = 1920, screenHight = 1080;
+	
 	
 	public static void main(String[] args) {
 		PApplet.main(new String[] { "app.VideoReceiver" });
@@ -33,15 +37,15 @@ public class VideoReceiver extends PApplet {
 	}
 
 	public void setup() {
-//		size(800, 600);
-		size(864, 480);
+		size(vWidth, vHeight);
+//		size(864, 480);
 		try {
 			ds = new DatagramSocket(port);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-//		video = createImage(800, 600, RGB);
-		video = createImage(864, 480, RGB);
+		video = createImage(vWidth, vHeight, RGB);
+//		video = createImage(864, 480, RGB);
 	}
 
 	public void draw() {
@@ -51,12 +55,15 @@ public class VideoReceiver extends PApplet {
 //		// Draw the image
 //		background(0);
 		imageMode(CENTER);
-		image(video, width / 2, height / 2, 864, 480);
-//		abstractRepresentation(20, 1);//, screenWidth, screenHight);
-		
+
+		if(false){
+			image(video, width / 2, height / 2, vWidth, vHeight);
+		}else{
+			abstractRepresentation(20, 1);//, screenWidth, screenHight);
+		}
 	}
 
-	void checkForImage() {
+	private void checkForImage() {
 		DatagramPacket p = new DatagramPacket(buffer, buffer.length);
 		try {
 			ds.receive(p);
