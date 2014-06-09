@@ -187,7 +187,7 @@ public class WindowFilter extends PApplet implements ListenSerial{
 		}
 	}
 	
-	public  void abstractRepresentation(PApplet applet, PImage video, int cellSize, int feature) {
+	public void abstractRepresentation(PApplet applet, PImage video, int cellSize, int feature) {
 
 		video.loadPixels();
 		int cols = applet.width / cellSize;

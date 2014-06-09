@@ -10,6 +10,7 @@ import java.net.SocketException;
 import javax.imageio.*;
 
 import processing.core.*;
+import visaulEffect.Effect01;
 
 public class VideoReceiver extends PApplet {
 
@@ -25,6 +26,7 @@ public class VideoReceiver extends PApplet {
 	int vWidth =864, vHeight = 480;
 	
 	private int screenWidth = 1920, screenHight = 1080;
+	
 	
 	
 	public static void main(String[] args) {
