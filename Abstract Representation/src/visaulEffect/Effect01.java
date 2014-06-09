@@ -15,7 +15,7 @@ public class Effect01 extends EffectAbstractClass{
 		
 		imageBuff.pushMatrix();
 		imageBuff.scale(-1, 1);
-		imageBuff.image(image, -image.width - 1060, 0, 1920, 1080);
+		imageBuff.image(image, -image.width - 1060 , 0, 1920, 1080);
 		imageBuff.popMatrix();
 		
 		image = imageBuff.get();

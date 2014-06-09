@@ -126,15 +126,31 @@ public class JWindow extends PApplet implements IncomingUDPListener, ListenSeria
 				imageBuff.stroke(255, 255, 255);
 				imageBuff.strokeWeight(2);
 				Rectangle[] faces = opencv.detect();
+				
+				int faceSize = 0;
+				
 				for (int i = 0; i < faces.length; i++) {
 					imageBuff.rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
 					double overlap = this.overlappingRatio(this.cameraWidth/4 - 50, this.cameraHeight/4 - 50, 100, faces[i].x, faces[i].y, faces[i].width);
 					System.out.println("Overlap=" + overlap + ":"+ faces[i].x + ", " + faces[i].y + "!!! "+ faces[i].width + ", "+ faces[i].height);
+					if(faceSize < faces[i].width){
+						faceSize = faces[i].width;
+					}
+					
 					if(overlap > 0.7){
 						System.out.println("[OVERLAP]");
 						this.fullVideo = true;
 						this.timerFullVideo = timeOpenSec * 1000 + System.currentTimeMillis();
 					}
+				}
+				
+				if(faces.length == 0){
+					this.cellSizeChanged = 100;
+					nobUpdated = true;
+				}else{
+					System.out.println("Cell Size=" + (int)(100.0/(faceSize/20)));
+					this.cellSizeChanged = (int)((100.0/(faceSize/20)));
+					nobUpdated = true;
 				}
 				
 				imageBuff.stroke(100, 100, 100);
@@ -146,7 +162,7 @@ public class JWindow extends PApplet implements IncomingUDPListener, ListenSeria
 
 			pushMatrix();
 //			tint(0, 153, 204, 90);
-			tint(255, 190);
+			tint(255, 255);
 			scale(-1, 1);
 			scale(0.5f);
 			if(imageBuff != null){
