@@ -9,7 +9,8 @@ public class FaceTracking extends PApplet {
 
 	OpenCV opencv = null;
 	Capture cam = null;
-	int widthP = 640, heightP = 480;
+	int widthP = 864, heightP = 480;
+//	int cameraWidth = 864, cameraHeight = 480;
 
 	public static void main(String[] args) {
 		PApplet.main(new String[] { "app.FaceTracking" });
