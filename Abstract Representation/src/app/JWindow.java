@@ -16,9 +16,9 @@ import java.net.*;
 
 public class JWindow extends PApplet implements IncomingUDPListener{
 	
-	int port = 9090;
-//	String destAddress = "localhost";
-	String destAddress = "192.168.1.124";
+	static int port = 9090;
+	static String destAddress = "localhost";
+//	static String destAddress = "192.168.1.124";
 	
 	DatagramSocket sSocket = null;
 	//DatagramSocket rSocket = null;
@@ -32,8 +32,17 @@ public class JWindow extends PApplet implements IncomingUDPListener{
 	
 	public static void main(String[] args) {
 		PApplet.main(new String[] { "app.JWindow" });
-		System.out.println(args[0]+", "+args[1]);
 		System.out.println(java.lang.Runtime.getRuntime().maxMemory());
+
+		if(args.length > 0){
+			for(int i = 0 ; i < args.length ; i++){
+				if(args[i].startsWith("IP")){
+					destAddress = args[i].split(":")[1];
+				}else if(args[i].startsWith("port")){
+					port = Integer.parseInt(args[i].split(":")[1]);
+				}
+			}
+		}		
 	}
 	
 	public boolean sketchFullScreen() {
